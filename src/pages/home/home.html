@@ -1,14 +1,24 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="addPlacePage">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      Awesome Places
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card *ngFor="let place of places; let index = index;" (click)="onOpenPlace(place, index)">
+    <div text-center>
+      <img [src]="place.imagePath">
+    </div>
+    <ion-card-content>
+      <ion-card-title>{{place.title}}</ion-card-title>
+      <p>{{place.description}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

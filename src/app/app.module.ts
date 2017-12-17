@@ -6,30 +6,48 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { AddPlacePageModule } from '../pages/add-place/add-place.module';
-import { PlacePageModule } from '../pages/place/place.module';
-import { SetLocationPageModule } from '../pages/set-location/set-location.module';
+import { AgmCoreModule } from '@agm/core';
+import { SetLocationPage } from '../pages/set-location/set-location';
+import { AddPlacePage } from '../pages/add-place/add-place';
+import { PlacePage } from '../pages/place/place';
+import { PlaceService } from '../services/place';
+
+import { Camera } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
+import { File } from '@ionic-native/file';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    SetLocationPage,
+    AddPlacePage,
+    PlacePage
   ],
   imports: [
     BrowserModule,
-    AddPlacePageModule,
-    PlacePageModule,
-    SetLocationPageModule,
-    IonicModule.forRoot(MyApp)
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDOWxHaPZSkQhx6Vm-e4RMW5IKk7ElZaaw'
+    }),
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    SetLocationPage,
+    AddPlacePage,
+    PlacePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
+    Geolocation,
+    File,
+    PlaceService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
